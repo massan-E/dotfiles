@@ -152,6 +152,7 @@ alias railsc='show_cmd docker compose exec web rails c'
 alias rspec='show_cmd docker compose exec web bundle exec rspec'
 alias rubocop='show_cmd docker compose exec web bundle exec rubocop'
 
+alias vi='nvim'
 
 # AtCoder cli
 # Test
