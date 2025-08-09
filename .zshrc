@@ -182,7 +182,7 @@ fi
 # プロジェクトのベースディレクトリを変数として定義
 RUNTEQ_DIR="$DEV_ROOT/Development/Learning/RUNTEQ/Curriculum"
 
-TIL_DIR="$DEV_ROOT/Development/Learning/TIL_Today_I_Learned"
+TIL_DIR="$DEV_ROOT/Development/Learning/til"
 
 ALGORITHM_DIR="/mnt/d/masah/Programming/algorithm_devotion"
 
