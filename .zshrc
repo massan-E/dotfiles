@@ -126,20 +126,11 @@ show_cmd() {
     eval "$@"
 }
 
-alias google-chrome='/mnt/c/"Program Files"/Google/Chrome/Application/chrome.exe'
-# ローカルホストを開くための関数
-lh() {
-    show_cmd "google-chrome http://localhost:$@ &>/dev/null &"
-    return 0
-}
-
 # エイリアス
-alias pdu='show_cmd pwd && wslpath -w "$(pwd)"'
-
 alias d='show_cmd docker'
 alias dc='show_cmd docker compose'
 alias dcx='show_cmd docker compose exec'
-alias dcu='show_cmd code . & lh 3000 & show_cmd docker compose up'
+alias dcu='show_cmd show_cmd docker compose up'
 alias dcd='show_cmd docker compose down'
 alias dcr='show_cmd docker compose restart'
 alias dp='show_cmd docker ps'
@@ -168,29 +159,38 @@ alias rbtest='oj t -c "ruby main.rb" -d ./tests'              # Ruby
 # alias rbsb='acc s main.rb'                                    # Ruby
 
 
-# stable-diffusion-webui-docker
-alias sdcu='/mnt/c/"Program Files"/Google/Chrome/Application/chrome.exe --incognito http://localhost:7860/ && show_cmd docker compose --profile auto up --build'
-alias _sdoutput='explorer.exe "$(wslpath -w /home/massanc/project/stable-diffusion-webui-docker/output)"'
-
-alias _zshrc='show_cmd code /home/massanc/.zshrc'
+alias _zshrc="show_cmd vi $HOME/.zshrc"
 
 alias -g railskiso='58065_massan-E_basic_rails_basic'
 alias -g railsouyou='57833_massan-E_runteq_curriculum_advanced'
 alias -g railsnyuumon='58355_massan-E_beginner_rails'
 alias -g sinatranyuumon='59341_massan-E_introduction_sinatra'
 
+# OSの種類を判別
+OS_TYPE=$(uname)
+
+# 開発用ディレクトリのルートパスを定義
+if [ "$OS_TYPE" = "Darwin" ]; then
+    # macOSの場合のルートパス
+    DEV_ROOT="/Users/massan" 
+elif [ "$OS_TYPE" = "Linux" ]; then
+    # Linux (WSL Ubuntu) の場合のルートパス
+    DEV_ROOT="/mnt/d/masah"
+fi
 
 
 # プロジェクトのベースディレクトリを変数として定義
-RUNTEQ_DIR="/mnt/d/masah/Programming/Runteq/Projects"
+RUNTEQ_DIR="$DEV_ROOT/Development/Learning/RUNTEQ/Curriculum"
 
-STABLE_DIFFUSION_DIR="/home/massanc/project/stable-diffusion-webui-docker"
-
-TIL_DIR="/mnt/d/masah/Programming/til"
+TIL_DIR="$DEV_ROOT/Development/Learning/TIL_Today_I_Learned"
 
 ALGORITHM_DIR="/mnt/d/masah/Programming/algorithm_devotion"
 
-ANR_DIR="/mnt/d/masah/Programming/Runteq/Projects/anr_project"
+ANR_DIR="$DEV_ROOT/Development/Learning/RUNTEQ/anr_project"
+
+MH_DIR="$DEV_ROOT/Development/Personal/MusicHour"
+
+DOTFILES_DIR="$HOME/dotfiles"
 
 
 # 汎用的なプロジェクト移動関数
@@ -229,13 +229,15 @@ goto_project() {
 # 各プロジェクト用のエイリアス
 alias _runteq='goto_project "$RUNTEQ_DIR"'
 
-alias _sd='goto_project "$STABLE_DIFFUSION_DIR"'
-
 alias _til='goto_project "$TIL_DIR"'
 
 alias _al='goto_project "$ALGORITHM_DIR"'
 
 alias _anr='goto_project "$ANR_DIR"'
+
+alias _mh='goto_project "$MH_DIR"'
+
+alias _dotfiles='goto_project "$DOTFILES_DIR"'
 
 
 # カスタムエイリアス一覧表示関数
@@ -275,7 +277,7 @@ til() {
     touch $1-$2-$3.md
     echo "# TIL for $1-$2-$3" > "$1-$2-$3.md"
     echo "Created TIL file: $1-$2-$3.md"
-    code $1-$2-$3.md
+    vi $1-$2-$3.md
     echo "Opened TIL file in VSCode: $1-$2-$3.md"
 }
 
@@ -288,12 +290,34 @@ til() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Created by `pipx` on 2025-06-10 00:52:33
-export PATH="$PATH:/home/massanc/.local/bin"
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# windows wsl ubuntuのみ
+if [ "$OS_TYPE" = "Linux" ]; then
+  
+  alias pdu='show_cmd pwd && wslpath -w "$(pwd)"'
 
-# Direnv
-eval "$(direnv hook zsh)"
+  # stable-diffusion-webui-docker
+  STABLE_DIFFUSION_DIR="/home/massanc/project/stable-diffusion-webui-docker"     
+  alias _sd='goto_project "$STABLE_DIFFUSION_DIR"'
+  alias _sdoutput='explorer.exe "$(wslpath -w /home/massanc/project/stable-diffusion-webui-docker/output)"'
+  alias sdcu='/mnt/c/"Program Files"/Google/Chrome/Application/chrome.exe --incognito http://localhost:7860/ && show_cmd docker compose --profile auto up --build'
+
+  # Created by `pipx` on 2025-06-10 00:52:33
+  export PATH="$PATH:/home/massanc/.local/bin"
+  
+  # rbenv
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+
+  # Direnv
+  eval "$(direnv hook zsh)"
+
+
+  # ローカルホストを開くための関数
+  alias google-chrome='/mnt/c/"Program Files"/Google/Chrome/Application/chrome.exe'
+  
+  lh() {
+    show_cmd "google-chrome http://localhost:$@ &>/dev/null &"
+    return 0
+  }
+fi
