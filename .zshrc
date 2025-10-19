@@ -161,6 +161,13 @@ alias rbtest='oj t -c "ruby main.rb" -d ./tests'              # Ruby
 
 alias _zshrc="show_cmd vi $HOME/.zshrc"
 
+# WezTerm 関連のalias
+alias wta='(){wezterm cli spawn --new-window --workspace "$1"}'
+alias wtl='wezterm cli list'
+alias wtc='wezterm cli list-clients'
+
+
+
 alias -g railskiso='58065_massan-E_basic_rails_basic'
 alias -g railsouyou='57833_massan-E_runteq_curriculum_advanced'
 alias -g railsnyuumon='58355_massan-E_beginner_rails'
@@ -190,7 +197,13 @@ ANR_DIR="$DEV_ROOT/Development/Learning/RUNTEQ/anr_project"
 
 MH_DIR="$DEV_ROOT/Development/Personal/MusicHour"
 
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$DEV_ROOT/dotfiles"
+
+WORK_DIR="$DEV_ROOT/Development/Work"
+
+PERSONAL_DIR="$DEV_ROOT/Development/Personal"
+
+LEARNING_DIR="$DEV_ROOT/Development/Learning"
 
 
 # 汎用的なプロジェクト移動関数
@@ -239,6 +252,11 @@ alias _mh='goto_project "$MH_DIR"'
 
 alias _dotfiles='goto_project "$DOTFILES_DIR"'
 
+alias _work='goto_project "$WORK_DIR"'
+
+alias _personal='goto_project "$PERSONAL_DIR"'
+
+alias _learning='goto_project "$LEARNING_DIR"'
 
 # カスタムエイリアス一覧表示関数
 _alias() {
