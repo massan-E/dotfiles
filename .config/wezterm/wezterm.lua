@@ -3,15 +3,16 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 
 config.automatically_reload_config = false
+config.front_end = "WebGpu"
 config.font_size = 14.0
-config.window_background_opacity = 0.75
-config.macos_window_background_blur = 20
+config.window_background_opacity = 0.80
+config.macos_window_background_blur = 10
 
 -- window size
 config.initial_rows = 40
 config.initial_cols = 140
 
-config.max_fps = 120
+config.max_fps = 60
 config.animation_fps = 1
 config.cursor_blink_rate = 0
 
