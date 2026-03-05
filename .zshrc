@@ -339,3 +339,4 @@ if [ "$OS_TYPE" = "Linux" ]; then
     return 0
   }
 fi
+export PATH="$HOME/.local/bin:$PATH"
