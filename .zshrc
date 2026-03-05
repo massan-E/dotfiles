@@ -145,6 +145,9 @@ alias rubocop='show_cmd docker compose exec web bundle exec rubocop'
 
 alias vi='nvim'
 
+# 現在のブランチ名をクリップボードにコピー (macOS)
+alias gcb='git branch --show-current | pbcopy && echo "Copied: $(git branch --show-current)"'
+
 # AtCoder cli
 # Test
 alias cpptest='g++ main.cpp && oj t -d ./tests'                 # C++
@@ -311,7 +314,10 @@ til() {
 
 # windows wsl ubuntuのみ
 if [ "$OS_TYPE" = "Linux" ]; then
-  
+
+  # 現在のブランチ名をクリップボードにコピー (WSL)
+  alias gcb='git branch --show-current | clip.exe && echo "Copied: $(git branch --show-current)"'
+
   alias pdu='show_cmd pwd && wslpath -w "$(pwd)"'
 
   # stable-diffusion-webui-docker
