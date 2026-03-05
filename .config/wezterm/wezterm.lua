@@ -149,6 +149,16 @@ config.keys = {
 		mods = "CMD",
 		action = act.ActivatePaneDirection("Down"),
 	},
+	{
+		key = "j",
+		mods = "CMD",
+		action = act({ ActivatePaneDirection = "Next" }),
+	},
+	{
+		key = "k",
+		mods = "CMD",
+		action = act({ ActivatePaneDirection = "Prev" }),
+	},
 	-- workspace
 	{
 		key = "LeftArrow",
@@ -157,6 +167,16 @@ config.keys = {
 	},
 	{
 		key = "RightArrow",
+		mods = "ALT",
+		action = act.SwitchWorkspaceRelative(-1),
+	},
+	{
+		key = "k",
+		mods = "ALT",
+		action = act.SwitchWorkspaceRelative(1),
+	},
+	{
+		key = "j",
 		mods = "ALT",
 		action = act.SwitchWorkspaceRelative(-1),
 	},
