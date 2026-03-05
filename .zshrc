@@ -146,7 +146,11 @@ alias rubocop='show_cmd docker compose exec web bundle exec rubocop'
 alias vi='nvim'
 
 # 現在のブランチ名をクリップボードにコピー (macOS)
-alias gcb='git branch --show-current | pbcopy && echo "Copied: $(git branch --show-current)"'
+alias yb='git branch --show-current | pbcopy && echo "Copied: $(git branch --show-current)"'
+
+# カレントディレクトリをクリップボードにコピー (macOS)
+alias yg='echo -n "$(git rev-parse --show-prefix | sed "s:/$::")" | pbcopy && echo "Copied git path: $(git rev-parse --show-prefix | sed "s:/$::")"'
+alias yf='echo -n "$(pwd)" | pbcopy && echo "Copied full path: $(pwd)"'
 
 # AtCoder cli
 # Test
@@ -316,7 +320,11 @@ til() {
 if [ "$OS_TYPE" = "Linux" ]; then
 
   # 現在のブランチ名をクリップボードにコピー (WSL)
-  alias gcb='git branch --show-current | clip.exe && echo "Copied: $(git branch --show-current)"'
+  alias yb='git branch --show-current | clip.exe && echo "Copied: $(git branch --show-current)"'
+
+  # カレントディレクトリをクリップボードにコピー (WSL)
+  alias yg='echo -n "$(git rev-parse --show-prefix | sed "s:/$::")" | clip.exe && echo "Copied git path: $(git rev-parse --show-prefix | sed "s:/$::")"'
+  alias yf='echo -n "$(pwd)" | clip.exe && echo "Copied full path: $(pwd)"'
 
   alias pdu='show_cmd pwd && wslpath -w "$(pwd)"'
 

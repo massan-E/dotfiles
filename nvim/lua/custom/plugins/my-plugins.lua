@@ -128,6 +128,13 @@ return {
     print('Copied full path: ' .. path)
   end, { desc = 'Yank full path' }),
 
+  -- Yank current branch name
+  vim.keymap.set('n', '<leader>yb', function()
+    local branch = vim.fn.system('git branch --show-current'):gsub('\n', '')
+    vim.fn.setreg('+', branch)
+    print('Copied branch: ' .. branch)
+  end, { desc = 'Yank branch name' }),
+
   -- <number><CR> で絶対行にジャンプ
   vim.keymap.set('n', '<CR>', function()
     local count = vim.v.count
